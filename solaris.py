@@ -1,3 +1,5 @@
+"""Модуль для ввода марки и модели авто, сбора данных с сайта и записи их в файл"""
+
 import requests
 import json
 from Sender2Monitoring import PacketMetrics, Metric
