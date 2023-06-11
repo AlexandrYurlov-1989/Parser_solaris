@@ -2,13 +2,12 @@
 
 import requests
 import json
-from Sender2Monitoring import PacketMetrics, Metric
-import time
+
 
 url = 'https://auto.ru/-/ajax/desktop/listing/'
 
 # здесь планируется наисать функцию авторизации  и получения нужного токена
-headers = ''' **********************'''.strip().split("\n")    #из строки превращаем все в словарь
+headers = '''********'''.strip().split("\n")    #из строки превращаем все в словарь
 
 def requests_avto(chek_mark, chek_model, headers):
     """
@@ -38,7 +37,7 @@ def requests_avto(chek_mark, chek_model, headers):
         param["catalog_filter"] = [{"mark": chek_mark_1,"model": chek_model_1}]
         
 
-        r = requests.post(url, json=param, headers = dict_headers, verify=True)     
+        r = requests.post(url, json=param, headers = dict_headers, verify=False)     
         data = r.json()
         offers.extend(data['offers'])
         # print("page ", x)
