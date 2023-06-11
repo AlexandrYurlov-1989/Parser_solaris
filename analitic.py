@@ -1,6 +1,5 @@
 import json
 from Sender2Monitoring import PacketMetrics, Metric
-from SBISScriptsSettings import SBISScriptsSettings
 import time
 import Solaris
 
@@ -29,21 +28,20 @@ now = time_stamp
 
 packet = PacketMetrics(60)
 
-# Создает объект metric класса Metric
-metric = Metric('Solaris',  # имя метрики
-                now,  # timestamp
-                value_price,  # значение
-                tags={  # набор тэгов
-                    'script': __file__.split('/')[-1:][0],  # рекомендуется для понимания что за скрипт шлет метрику
-                    'contur': 'dev-kafkaServers', # обязательный тэг contur
-                    # если отправка идёт в environment prod, то contur должен быть prod
-                    # если отправка идёт в любой другой environment, то contur может быть любым, но не пустым.
-                    'service': 'someService',  # прочие тэги
-                    'subsystem': 'someSubsystem'
-                    }, replace_symbol="/")
-                
-packet.add_metric(metric)
+for value_one in value_price:
+      # Создает объект metric класса Metric
+  metric = Metric('Solaris',  # имя метрики
+                  now,  # timestamp
+                  value_one,  # значение
+                  tags={  # набор тэгов
+                      'script': __file__.split('/')[-1:][0],  # рекомендуется для понимания что за скрипт шлет метрику
+                      'contur': 'dev-kafkaServers', # обязательный тэг contur
+                      # если отправка идёт в environment prod, то contur должен быть prod
+                      # если отправка идёт в любой другой environment, то contur может быть любым, но не пустым.
+                      'service': 'someService',  # прочие тэги
+                      'subsystem': 'someSubsystem'
+                      }, replace_symbol="/")
+                  
+  packet.add_metric(metric)
 
 packet.send_packet(settings, debug=True, environment='dev')
-
-
