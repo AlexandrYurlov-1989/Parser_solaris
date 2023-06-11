@@ -7,7 +7,7 @@ import json
 url = 'https://auto.ru/-/ajax/desktop/listing/'
 
 # здесь планируется наисать функцию авторизации  и получения нужного токена
-headers = '''********'''.strip().split("\n")    #из строки превращаем все в словарь
+headers = '''********'''.strip().split("\n")    #из строки превращаем все в словарь   *** - копировать данные из заголовкорв запросов
 
 def requests_avto(chek_mark, chek_model, headers):
     """
@@ -30,7 +30,7 @@ def requests_avto(chek_mark, chek_model, headers):
             "top_days":"1",
             "category":"cars",
             "section":"all",
-            "page":1,
+            "page":x,
             "catalog_filter":[{"mark":"HYUNDAI","model":"SOLARIS"}],
             "geo_id":[],
         }
@@ -53,7 +53,3 @@ def requests_avto(chek_mark, chek_model, headers):
 def input_mark():
     a = requests_avto(input("введите марку: "), input("введите модель: "), headers)
     print("Автомобиль марки -", a[0], " Количество: ", a[1], " шт.")
-
-# input_mark()
-
-   
